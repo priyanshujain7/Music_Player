@@ -1,5 +1,6 @@
 package com.example.ritikjain.mp3sirtrial;
 
+import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Handler;
@@ -23,7 +24,7 @@ public class PlayerWorking extends AppCompatActivity {
     Runnable runnable;
     Handler handler;
     ImageView icon;
-    TextView textSong;
+    TextView textSong,timer;
     //String prevSong="";
     long millis;
     @Override
@@ -37,7 +38,7 @@ public class PlayerWorking extends AppCompatActivity {
         backward=(Button)(findViewById(R.id.backward));
         seekBar=(SeekBar)(findViewById(R.id.seekBar));
         textSong=(TextView)(findViewById(R.id.textSong));
-        //timer=(TextView)(findViewById(R.id.timer));
+        timer=(TextView)(findViewById(R.id.timer));
         textSong.setText(song);
         handler=new Handler();
         try {
@@ -73,6 +74,7 @@ public class PlayerWorking extends AppCompatActivity {
                 if(b)
                 {
                     mediaPlayer.seekTo(i);
+                    //timer.setText(i+"");
                 }
             }
 
@@ -139,5 +141,15 @@ public class PlayerWorking extends AppCompatActivity {
             //and then to call changeSeekBar(). What this will actually result in is your changeSeekBar() method being called twice:
             //once right away, and a second time once the Handler is done waiting 1000 milliseconds
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        mediaPlayer.stop();
+        mediaPlayer.release();
+        Intent intent=new Intent(PlayerWorking.this,MainActivity.class);
+        startActivity(intent);
+
+        //super.onBackPressed();
     }
 }
