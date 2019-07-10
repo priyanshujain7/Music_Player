@@ -27,6 +27,7 @@ public class PlayerWorking extends AppCompatActivity {
     TextView textSong,timer;
     //String prevSong="";
     long millis;
+    String[] songName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +40,8 @@ public class PlayerWorking extends AppCompatActivity {
         seekBar=(SeekBar)(findViewById(R.id.seekBar));
         textSong=(TextView)(findViewById(R.id.textSong));
         timer=(TextView)(findViewById(R.id.timer));
-        textSong.setText(song);
+        songName=song.split("Songs/");
+        textSong.setText(songName[1]);
         handler=new Handler();
         try {
             mediaPlayer=new MediaPlayer();
@@ -145,8 +147,9 @@ public class PlayerWorking extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+      //  mediaPlayer.stop();
+        //seekBar.setProgress(M);
         mediaPlayer.stop();
-        mediaPlayer.release();
         Intent intent=new Intent(PlayerWorking.this,MainActivity.class);
         startActivity(intent);
 
